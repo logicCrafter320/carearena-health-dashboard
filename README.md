@@ -51,8 +51,7 @@ The deployed frontend uses built-in demo fallback data, so the website can be de
 
 ---
 
-## Project Objective
-
+Project Objective
 The objective of CareArena is to provide a digital healthcare interface that:
 
 - Tracks chronic disease vitals such as glucose, blood pressure, heart rate, and temperature
@@ -187,7 +186,6 @@ npm run dev
 
 Frontend URL:
 
-```text
 http://localhost:5173
 ```
 
@@ -202,7 +200,6 @@ npm run dev
 
 Backend URL:
 
-```text
 http://localhost:5000
 ```
 
@@ -212,7 +209,6 @@ http://localhost:5000
 
 Open MySQL Workbench and run:
 
-```sql
 SOURCE database/schema.sql;
 ```
 
@@ -226,7 +222,6 @@ The database includes sample patient data, vitals, alerts, medications, and doct
 
 For demonstration, any email and password can be used.
 
-```text
 Email: student@example.com
 Password: 123456
 ```
