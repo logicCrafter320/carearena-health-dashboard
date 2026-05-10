@@ -1,34 +1,105 @@
-# CareArena - Chronic Care Management System
+# CareArena - Chronic Disease Monitoring Dashboard
 
-CareArena is a full-stack chronic care patient monitoring project designed for real-time healthcare tracking. The system helps patients and doctors monitor vitals, medication adherence, alerts, health history, and doctor notes from one dashboard.
+CareArena is a chronic disease monitoring dashboard designed to help patients and healthcare providers track long-term conditions such as diabetes and hypertension. The project focuses on recording vital health parameters, visualizing trends, detecting abnormal values, and organizing patient care information in one dashboard.
 
-The frontend is deployed on Vercel and can be opened directly through the live website link. The backend and MySQL database are included in the project for full-stack demonstration and local development.
+This repository contains a React + Vite frontend, a Node.js + Express backend, and a MySQL database schema. The deployed frontend uses built-in demo data so the website can be demonstrated easily through Vercel without requiring local MySQL setup.
+
+## Abstract / Project Overview
+
+The project develops a Chronic Disease Monitoring Dashboard for patients and healthcare providers. Users can log important health readings such as blood sugar, blood pressure, heart rate, and body temperature. These readings are displayed through interactive charts to help identify health patterns over time.
+
+The system also supports threshold-based alerts for abnormal values, medication tracking, doctor notes, patient history, and profile management. The goal is to improve patient engagement, support early detection of health risks, and help doctors make informed decisions using organized patient data.
 
 ## Project Objective
 
-The main objective of this project is to build a digital healthcare dashboard for chronic disease management. It supports continuous patient monitoring by recording important health values such as blood pressure, glucose, heart rate, and temperature. Based on these readings, the system can show warning or critical alerts.
+The objective of CareArena is to provide a digital healthcare interface that:
 
-## Website Features
+- Tracks chronic disease vitals such as glucose, blood pressure, heart rate, and temperature
+- Visualizes patient health trends using charts
+- Generates warning or critical alerts when vitals cross safe limits
+- Helps monitor medication schedules and adherence
+- Stores doctor observations and patient history
+- Provides a responsive, user-friendly healthcare dashboard
 
+## Live Deployment
+
+The frontend is deployed on Vercel from the `frontend` folder. The deployed version uses demo fallback data, so it can be opened directly from the live URL without running VS Code, Node.js, Express, or MySQL locally.
+
+## Current Implemented Modules
+
+The following modules are currently implemented in the website:
+
+- Login access with any email and password for easy demonstration
 - CareArena landing page with healthcare-focused UI
-- Simple login page where any email and password can open the dashboard
-- Patient dashboard with latest vital readings
-- Glucose trend chart and blood pressure/heart rate chart
-- Vitals entry form for adding new readings
-- Health history table with previous records
-- Clinical alerts grouped by severity
-- Medication schedule with taken/pending status
+- Overview dashboard with latest patient vitals
+- Vitals logging form
+- Glucose trend chart using Recharts
+- Blood pressure and heart rate chart
+- Threshold-based alert display
+- Medication tracker with taken/pending status
 - Doctor notes module
-- Patient profile module
-- Responsive UI built for desktop and smaller screens
+- Patient health history table
+- Patient profile page
+- Responsive frontend layout
+- Vercel frontend deployment
+
+## Planned / Abstract Modules
+
+The following modules are included in the official abstract and project plan, but are not fully implemented in the current deployed version:
+
+- Register page with complete authentication flow
+- Exportable PDF health reports using jsPDF
+- Admin panel for managing users, doctors, and system-level activity
+- Date range and vital type filters for patient history
+- Context API or Redux for complete global state management
+- Axios-based API integration layer
+- Tailwind CSS or Bootstrap styling option
+- Postman API testing collection
+- Full production backend deployment
+
+## Team Module Mapping
+
+| Module Name | Assigned Roll Number(s) |
+|---|---|
+| User Authentication (Login/Register) | 2520030252 |
+| Vitals Logging Module | 2520030252 |
+| Dashboard & Charts Visualization | 2520030252 |
+| Threshold Alerts & Notifications System | 2520030252 |
+| UI/UX Design & Routing | 2520030252 |
+| Medication Tracker | 2520030215 |
+| Doctor Notes & Reports | 2520030215 |
+| Export PDF Module | 2520030215 |
+| Patient History Module | 2520030215 |
+| Testing & Deployment | 2520030215 |
+| Profile Management | 2520080061 |
+| Admin Panel | 2520080061 |
+| API Integration Layer | 2520080061 |
+| State Management (Context/Redux) | 2520080061 |
 
 ## Tech Stack
 
-- Frontend: React, Vite, React Router, Recharts, Lucide React
-- Backend: Node.js, Express.js, MySQL2, dotenv, CORS
-- Database: MySQL
-- Deployment: Vercel for frontend
+### Current Implementation
+
+- Frontend: React.js, Vite, React Router, Recharts, Lucide React, CSS3
+- Backend: Node.js, Express.js, MySQL2, CORS, dotenv
+- Database: MySQL schema with sample data
+- Demo Data: Frontend fallback data for Vercel demonstration
+- Deployment: Vercel frontend deployment
 - Version Control: GitHub
+
+### Abstract / Planned Tools
+
+- Frontend: HTML5, CSS3, JavaScript (ES6+), React.js
+- Styling: Tailwind CSS or Bootstrap
+- Backend: Node.js, Express.js
+- Database: MySQL or LocalStorage
+- API Integration: Axios
+- Charts: Recharts or Chart.js
+- PDF Reports: jsPDF
+- State Management: Context API or Redux
+- API Testing: Postman
+- Development Tools: VS Code, Git, Chrome DevTools
+- Deployment: Netlify or Vercel
 
 ## Folder Structure
 
@@ -41,53 +112,11 @@ carearena-health-dashboard/
 +-- README.md        Project documentation
 ```
 
-## Project Modules
-
-### 1. Authentication
-
-The login page allows users to enter any email and password. This makes the project easy to demonstrate without requiring fixed credentials.
-
-### 2. Overview Dashboard
-
-Shows the latest patient health values:
-
-- Blood pressure
-- Glucose
-- Heart rate
-- Temperature
-- Medication adherence
-- Recent alerts
-- Health trend charts
-
-### 3. Log Vitals
-
-Allows the user to add new vital readings. New readings update the system data and can create alerts based on threshold values.
-
-### 4. Health History
-
-Displays previous patient readings in table format with blood pressure, glucose, heart rate, and temperature.
-
-### 5. Alerts
-
-Shows clinical alerts such as warning and critical messages when health values cross safe limits.
-
-### 6. Medications
-
-Displays the medication schedule and allows users to update whether a medicine is taken or pending.
-
-### 7. Doctor Notes
-
-Allows doctors to add notes with severity levels such as routine, follow-up, and critical.
-
-### 8. Profile
-
-Shows patient details, condition, doctor name, contact information, and emergency contact.
-
 ## How to Run Locally
 
 ### Prerequisites
 
-Install the following:
+Install the following software:
 
 - Node.js
 - MySQL
@@ -107,17 +136,7 @@ Frontend runs on:
 http://localhost:5173
 ```
 
-### 2. Create the MySQL Database
-
-Open MySQL Workbench and run:
-
-```sql
-SOURCE database/schema.sql;
-```
-
-Or manually open `database/schema.sql` and execute the SQL script.
-
-### 3. Run the Backend
+### 2. Run the Backend
 
 ```bash
 cd backend
@@ -132,9 +151,21 @@ Backend runs on:
 http://localhost:5000
 ```
 
+## Database Setup
+
+Open MySQL Workbench and run the SQL file:
+
+```sql
+SOURCE database/schema.sql;
+```
+
+Alternatively, open `database/schema.sql` manually in MySQL Workbench and execute the script.
+
+The database includes sample patient data, vitals, alerts, medications, and doctor notes for demonstration.
+
 ## Login Details
 
-For demonstration, any email and password can be used.
+For demonstration, any email and password can be used to open the dashboard.
 
 Example:
 
@@ -143,11 +174,11 @@ Email: student@example.com
 Password: 123456
 ```
 
-## Deployment
+## Vercel Deployment Settings
 
-The frontend is deployed using Vercel from the `frontend` folder.
+The frontend is deployed from the `frontend` folder.
 
-Vercel settings:
+Use these settings in Vercel:
 
 ```text
 Root Directory: frontend
@@ -157,12 +188,13 @@ Output Directory: dist
 Install Command: npm install
 ```
 
-Since the deployed frontend uses built-in demo data, users can access the website directly from the Vercel link without running VS Code or MySQL locally.
+The deployed frontend uses built-in demo data. This allows professors, teammates, and evaluators to access the website directly from the Vercel link without running the backend locally.
 
 ## Notes for Evaluation
 
-- The project contains both frontend and backend code.
-- The deployed version is configured for easy demonstration using demo data.
-- The backend and MySQL database are included to show full-stack implementation.
-- The UI is designed as a healthcare product named CareArena.
-- The system demonstrates real-time chronic care monitoring concepts through vitals, alerts, medication, history, notes, and profile modules.
+- The README is aligned with the official project abstract.
+- Implemented modules and planned modules are separated clearly.
+- The current deployed version demonstrates the main chronic care monitoring workflow.
+- Backend and MySQL files are included to show full-stack implementation.
+- PDF export, Admin Panel, Register, Axios, Tailwind/Bootstrap, and Context/Redux are documented as planned or abstract modules, not as completed features.
+- The project demonstrates front-end engineering concepts such as routing, component-based UI, charts, state updates, responsive design, and deployment.
