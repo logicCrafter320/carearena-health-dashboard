@@ -146,7 +146,7 @@ export const api = {
         () => {
             const item = demoStore.medications.find((medication) => medication.id === medicationId);
             if (item) item.is_taken = !item.is_taken;
-            return { id: medicationId, is_taken: Boolean(item ? .is_taken) };
+            return { id: medicationId, is_taken: Boolean(item ? item.is_taken : false) };
         }
     ),
     notes: () => withFallback(() => request("/patients/1/notes"), () => [...demoStore.notes]),
