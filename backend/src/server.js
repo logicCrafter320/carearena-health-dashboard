@@ -48,47 +48,26 @@ app.get("/api/health", (req, res) => {
     res.json({ status: "ok", service: "chronic-care-api" });
 });
 
-// ── FIXED: look up patient by email, return their actual data ──────────────
 app.post("/api/auth/login", async(req, res) => {
-    try {
-        const { email, password } = req.body;
+    const { email, password } = req.body;
+    const [rows] = await pool.query("SELECT * FROM patients ORDER BY id ASC LIMIT 1");
+    const patient = rows[0];
 
-        if (!email) {
-            return res.status(400).json({ message: "Email is required." });
-        }
-
-        const [rows] = await pool.query(
-            "SELECT * FROM patients WHERE email = ?", [email.trim().toLowerCase()]
-        );
-
-        if (!rows.length) {
-            return res.status(401).json({ message: "No account found with that email." });
-        }
-
-        const patient = rows[0];
-        // NOTE: add bcrypt password check here when you add real auth columns.
-
-        res.json({
-            token: "demo-token",
-            patient: {
-                id: patient.id,
-                name: patient.name,
-                email: patient.email,
-                age: patient.age,
-                gender: patient.gender,
-                phone: patient.phone,
-                address: patient.address,
-                condition_name: patient.condition_name,
-                emergency_contact: patient.emergency_contact,
-                doctor_name: patient.doctor_name
-            }
-        });
-    } catch (err) {
-        console.error("Login error:", err);
-        res.status(500).json({ message: "Login failed.", detail: err.message });
+    if (!patient) {
+        return res.status(404).json({ message: "Patient data not found" });
     }
+
+    res.json({
+        token: "demo-token",
+        patient: {
+            id: patient.id,
+            name: patient.name,
+            email: email || patient.email,
+            age: patient.age,
+            condition_name: patient.condition_name
+        }
+    });
 });
-// ───────────────────────────────────────────────────────────────────────────
 
 app.get("/api/patients/:id", async(req, res) => {
     const [rows] = await pool.query("SELECT * FROM patients WHERE id = ?", [req.params.id]);
@@ -101,7 +80,6 @@ app.get("/api/patients/:id/dashboard", async(req, res) => {
     const [
         [patient]
     ] = await pool.query("SELECT * FROM patients WHERE id = ?", [patientId]);
-    if (!patient) return res.status(404).json({ message: "Patient not found" });
     const [vitals] = await pool.query("SELECT * FROM vitals WHERE patient_id = ? ORDER BY recorded_at DESC LIMIT 10", [patientId]);
     const [alerts] = await pool.query("SELECT * FROM alerts WHERE patient_id = ? ORDER BY created_at DESC LIMIT 8", [patientId]);
     const [medications] = await pool.query("SELECT * FROM medications WHERE patient_id = ? ORDER BY medication_time ASC", [patientId]);

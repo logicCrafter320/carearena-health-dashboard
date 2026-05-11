@@ -10,11 +10,8 @@ export default function Medications({ patientId }) {
   }, [patientId]);
 
   const toggle = async (id) => {
-    // FIX: pass patientId so the API (and offline demo store) stay per-patient
-    const result = await api.toggleMedication(id, patientId);
-    setMedications((items) =>
-      items.map((item) => (item.id === id ? { ...item, is_taken: result.is_taken } : item))
-    );
+    const result = await api.toggleMedication(id);
+    setMedications((items) => items.map((item) => item.id === id ? { ...item, is_taken: result.is_taken } : item));
   };
 
   return (
@@ -27,11 +24,7 @@ export default function Medications({ patientId }) {
       </div>
       <div className="medication-grid">
         {medications.map((item) => (
-          <button
-            className={`medication-row ${item.is_taken ? "done" : ""}`}
-            key={item.id}
-            onClick={() => toggle(item.id)}
-          >
+          <button className={`medication-row ${item.is_taken ? "done" : ""}`} key={item.id} onClick={() => toggle(item.id)}>
             <Pill size={32} />
             <strong>{item.medicine_name}</strong>
             <span>{item.dosage} at {item.medication_time}</span>
