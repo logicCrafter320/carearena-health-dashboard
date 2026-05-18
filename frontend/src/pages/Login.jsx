@@ -1,15 +1,21 @@
 import { Hospital } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import { api } from "../api.js";
 
-export default function Login() {
+export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
-    navigate("/");
+    setError("");
+    try {
+      onLogin(await api.login(email, password));
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -35,6 +41,7 @@ export default function Login() {
           </label>
           <button type="submit">Login</button>
         </form>
+        {error && <p className="form-error">{error}</p>}
         <p className="auth-switch">New to CareArena? <Link to="/signup">Create an account</Link></p>
       </section>
     </main>

@@ -10,7 +10,7 @@ export default function Medications({ patientId }) {
   }, [patientId]);
 
   const toggle = async (id) => {
-    const result = await api.toggleMedication(id);
+    const result = await api.toggleMedication(patientId, id);
     setMedications((items) => items.map((item) => item.id === id ? { ...item, is_taken: result.is_taken } : item));
   };
 

@@ -2,7 +2,7 @@ import { Activity, AlertTriangle, ClipboardPlus, Hospital, LogOut, NotebookPen, 
 import { NavLink } from "react-router-dom";
 
 const links = [
-  { to: "/", label: "Overview", icon: Activity },
+  { to: "/dashboard", label: "Overview", icon: Activity },
   { to: "/log-vitals", label: "Log Vitals", icon: ClipboardPlus },
   { to: "/history", label: "History", icon: Waves },
   { to: "/alerts", label: "Alerts", icon: AlertTriangle },
@@ -24,7 +24,7 @@ export default function Layout({ patient, onLogout, children }) {
           {links.map((item) => {
             const Icon = item.icon;
             return (
-              <NavLink key={item.to} to={item.to} end={item.to === "/"}>
+              <NavLink key={item.to} to={item.to} end={item.to === "/dashboard"}>
                 <Icon size={18} />
                 {item.label}
               </NavLink>

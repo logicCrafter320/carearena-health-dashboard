@@ -1,16 +1,32 @@
 import { Hospital } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import { api } from "../api.js";
 
-export default function SignUp() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
-  const navigate = useNavigate();
+export default function SignUp({ onSignUp }) {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    age: "",
+    gender: "",
+    phone: "",
+    condition_name: "Diabetes",
+    doctor_name: "Dr. Priya Reddy",
+    emergency_contact: ""
+  });
+  const [error, setError] = useState("");
 
   const update = (key, value) => setForm((current) => ({ ...current, [key]: value }));
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
-    navigate("/login");
+    setError("");
+    try {
+      onSignUp(await api.signup(form));
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -38,8 +54,45 @@ export default function SignUp() {
             Password
             <input type="password" placeholder="Create password" value={form.password} onChange={(event) => update("password", event.target.value)} required />
           </label>
+          <label>
+            Age
+            <input type="number" placeholder="Enter age" value={form.age} onChange={(event) => update("age", event.target.value)} required />
+          </label>
+          <label>
+            Gender
+            <select value={form.gender} onChange={(event) => update("gender", event.target.value)} required>
+              <option value="">Select gender</option>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label>
+            Chronic Condition
+            <select value={form.condition_name} onChange={(event) => update("condition_name", event.target.value)} required>
+              <option value="Diabetes">Diabetes</option>
+              <option value="Hypertension">Hypertension</option>
+              <option value="Diabetes and Hypertension">Diabetes and Hypertension</option>
+              <option value="Heart Condition">Heart Condition</option>
+              <option value="Kidney Condition">Kidney Condition</option>
+              <option value="General Chronic Care">General Chronic Care</option>
+            </select>
+          </label>
+          <label>
+            Phone
+            <input placeholder="Enter phone number" value={form.phone} onChange={(event) => update("phone", event.target.value)} />
+          </label>
+          <label>
+            Emergency Contact
+            <input placeholder="Emergency contact" value={form.emergency_contact} onChange={(event) => update("emergency_contact", event.target.value)} />
+          </label>
+          <label>
+            Doctor Name
+            <input placeholder="Primary doctor" value={form.doctor_name} onChange={(event) => update("doctor_name", event.target.value)} />
+          </label>
           <button type="submit">Create Account</button>
         </form>
+        {error && <p className="form-error">{error}</p>}
         <p className="auth-switch">Already have an account? <Link to="/login">Login</Link></p>
       </section>
     </main>
