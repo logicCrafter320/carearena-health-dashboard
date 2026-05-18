@@ -1,79 +1,41 @@
+import { Hospital } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { api } from "../api.js";
-import { Bell, ChevronDown, HeartPulse, Hospital, Pill, Stethoscope } from "lucide-react";
 
-export default function Login({ onLogin }) {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const submit = async (event) => {
+  const submit = (event) => {
     event.preventDefault();
-    setError("");
-    try {
-      onLogin(await api.login(email, password));
-    } catch (err) {
-      setError(err.message);
-    }
+    navigate("/");
   };
 
   return (
-    <main className="login-page">
-      <nav className="landing-nav">
-        <div className="brand care-brand">
+    <main className="auth-page">
+      <section className="auth-panel">
+        <Link className="brand care-brand" to="/">
           <div className="brand-mark"><Hospital size={24} /></div>
           <span>CareArena</span>
+        </Link>
+        <div>
+          <p className="eyebrow">Patient access</p>
+          <h1>Login</h1>
+          <p className="auth-copy">Enter your email and password to access CareArena.</p>
         </div>
-        <div className="landing-links">
-          <a>Home</a>
-          <a>Services <ChevronDown size={15} /></a>
-          <a>Modules <ChevronDown size={15} /></a>
-          <a>Company</a>
-          <a>Resources</a>
-        </div>
-        <button className="join-button">Join With Us</button>
-      </nav>
-      <section className="login-hero">
-        <div className="hero-visual">
-          <div className="sync-card">
-            <div className="sync-head">
-              <strong>Care Sync</strong>
-              <HeartPulse size={20} />
-            </div>
-            <div className="skeleton-line long" />
-            <div className="skeleton-line short" />
-            <div className="reading white">
-              <span>BP</span>
-              <strong>142/90</strong>
-            </div>
-            <div className="reading orange">
-              <span>Glucose</span>
-              <strong>171</strong>
-            </div>
-          </div>
-          <div className="float-icon stetho"><Stethoscope size={36} /></div>
-          <div className="float-icon pill"><Pill size={31} /></div>
-        </div>
-        <div className="hero-copy">
-          <p className="review-pill"><Bell size={22} /> 5.0 Patient Monitoring Reviews</p>
-          <h1>The Future of AI Chronic Care Automation</h1>
-          <p>Build a connected patient-care ecosystem that tracks vitals, medication adherence, doctor notes, alerts, and health history in real time.</p>
-          <form className="login-strip" onSubmit={submit}>
-            <input aria-label="Email" placeholder="Enter email" value={email} onChange={(event) => setEmail(event.target.value)} />
-            <input aria-label="Password" placeholder="Enter password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
-            <button type="submit">Open Dashboard</button>
-          </form>
-          {error && <p className="form-error">{error}</p>}
-        </div>
-      </section>
-      <section className="module-band">
-        <h2>Scale chronic care instantly with AI teammates. <em>Your best clinical assistant is digital.</em></h2>
-        <div className="module-tabs">
-          <span><HeartPulse size={22} /> Vitals</span>
-          <span><Pill size={22} /> Medication</span>
-          <span><Bell size={22} /> Alerts</span>
-          <span><Stethoscope size={22} /> Doctor Notes</span>
-        </div>
+        <form className="auth-form" onSubmit={submit}>
+          <label>
+            Email
+            <input type="email" placeholder="Enter email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+          </label>
+          <label>
+            Password
+            <input type="password" placeholder="Enter password" value={password} onChange={(event) => setPassword(event.target.value)} required />
+          </label>
+          <button type="submit">Login</button>
+        </form>
+        <p className="auth-switch">New to CareArena? <Link to="/signup">Create an account</Link></p>
       </section>
     </main>
   );
