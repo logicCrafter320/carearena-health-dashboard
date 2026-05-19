@@ -40,23 +40,23 @@ export default function App() {
     navigate("/");
   };
 
-  const dashboardRoutes = (
-    <Layout patient={session?.patient} onLogout={logout}>
-      <Routes>
-        <Route path="/dashboard" element={<Overview patientId={session.patient.id} />} />
-        <Route path="/log-vitals" element={<LogVitals patientId={session.patient.id} />} />
-        <Route path="/history" element={<History patientId={session.patient.id} />} />
-        <Route path="/alerts" element={<Alerts patientId={session.patient.id} />} />
-        <Route path="/medications" element={<Medications patientId={session.patient.id} />} />
-        <Route path="/notes" element={<Notes patientId={session.patient.id} />} />
-        <Route path="/profile" element={<Profile patientId={session.patient.id} />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
-      </Routes>
-    </Layout>
-  );
-
   if (session) {
-    return dashboardRoutes;
+    const patientId = session.patient.id;
+
+    return (
+      <Layout patient={session.patient} onLogout={logout}>
+        <Routes>
+          <Route path="/dashboard" element={<Overview patientId={patientId} />} />
+          <Route path="/log-vitals" element={<LogVitals patientId={patientId} />} />
+          <Route path="/history" element={<History patientId={patientId} />} />
+          <Route path="/alerts" element={<Alerts patientId={patientId} />} />
+          <Route path="/medications" element={<Medications patientId={patientId} />} />
+          <Route path="/notes" element={<Notes patientId={patientId} />} />
+          <Route path="/profile" element={<Profile patientId={patientId} />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </Layout>
+    );
   }
 
   return (

@@ -130,7 +130,8 @@ function makeInitialRecord(profile) {
 
 function getRecord(patientId) {
   const store = loadStore();
-  return store[normalizeEmail(patientId)];
+  const email = normalizeEmail(patientId);
+  return store[email] || ensureRecord(email);
 }
 
 function setRecord(patientId, record) {
