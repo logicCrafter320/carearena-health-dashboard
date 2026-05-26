@@ -1,29 +1,31 @@
 import { Bell, ChevronDown, HeartPulse, Hospital, Pill, Stethoscope } from "lucide-react";
 import { Link } from "react-router-dom";
+import AmbientHealthBackground from "../components/AmbientHealthBackground.jsx";
 
 export default function Home() {
   return (
     <main className="login-page">
+      <AmbientHealthBackground />
       <nav className="landing-nav">
-        <Link className="brand care-brand" to="/">
+        <Link className="brand care-brand motion-reveal" to="/">
           <div className="brand-mark"><Hospital size={24} /></div>
           <span>CareArena</span>
         </Link>
-        <div className="landing-links">
+        <div className="landing-links motion-reveal">
           <Link to="/">Home</Link>
           <Link to="/">Services <ChevronDown size={15} /></Link>
           <Link to="/">Modules <ChevronDown size={15} /></Link>
           <Link to="/">Company</Link>
           <Link to="/">Resources</Link>
         </div>
-        <div className="nav-actions">
+        <div className="nav-actions motion-reveal">
           <Link className="ghost-button" to="/login">Login</Link>
           <Link className="join-button" to="/signup">Sign Up</Link>
         </div>
       </nav>
 
       <section className="login-hero">
-        <div className="hero-visual">
+        <div className="hero-visual motion-reveal">
           <div className="sync-card">
             <div className="sync-head">
               <strong>Care Sync</strong>
@@ -44,7 +46,7 @@ export default function Home() {
           <div className="float-icon pill"><Pill size={31} /></div>
         </div>
 
-        <div className="hero-copy">
+        <div className="hero-copy motion-reveal">
           <p className="review-pill"><Bell size={22} /> Chronic Disease Monitoring Platform</p>
           <h1>The Future of AI Chronic Care Automation</h1>
           <p>Track vitals, medication adherence, alerts, doctor notes, and health history through a modern healthcare interface.</p>
@@ -55,7 +57,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="module-band">
+      <section className="module-band scroll-reveal">
         <h2>Phase-II Review Modules: <em>Home, Login, and Sign-Up.</em></h2>
         <div className="module-tabs">
           <Link to="/"><HeartPulse size={22} /> Vitals</Link>

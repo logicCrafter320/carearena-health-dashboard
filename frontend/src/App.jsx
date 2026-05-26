@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Layout from "./components/Layout.jsx";
 import Home from "./pages/Home.jsx";
@@ -11,8 +11,10 @@ import Alerts from "./pages/Alerts.jsx";
 import Medications from "./pages/Medications.jsx";
 import Notes from "./pages/Notes.jsx";
 import Profile from "./pages/Profile.jsx";
+import usePremiumMotion from "./hooks/usePremiumMotion.js";
 
 export default function App() {
+  const location = useLocation();
   const [session, setSession] = useState(() => {
     const saved = localStorage.getItem("chronic-care-session");
     if (!saved) return null;
@@ -24,6 +26,8 @@ export default function App() {
     }
   });
   const navigate = useNavigate();
+
+  usePremiumMotion(location.pathname);
 
   useEffect(() => {
     if (session) localStorage.setItem("chronic-care-session", JSON.stringify(session));

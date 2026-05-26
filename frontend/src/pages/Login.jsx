@@ -2,6 +2,7 @@ import { Hospital } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { api } from "../api.js";
+import AmbientHealthBackground from "../components/AmbientHealthBackground.jsx";
 
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -20,7 +21,8 @@ export default function Login({ onLogin }) {
 
   return (
     <main className="auth-page">
-      <section className="auth-panel">
+      <AmbientHealthBackground />
+      <section className="auth-panel motion-reveal">
         <Link className="brand care-brand" to="/">
           <div className="brand-mark"><Hospital size={24} /></div>
           <span>CareArena</span>

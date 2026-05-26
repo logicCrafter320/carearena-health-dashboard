@@ -49,7 +49,7 @@ export default function Overview({ patientId }) {
             <XAxis dataKey="recorded_at" tickFormatter={(value) => new Date(value).toLocaleDateString()} />
             <YAxis />
             <Tooltip labelFormatter={(value) => new Date(value).toLocaleString()} />
-            <Area type="monotone" dataKey="glucose" stroke="#0f766e" fill="url(#glucose)" strokeWidth={3} />
+            <Area type="monotone" dataKey="glucose" stroke="#0f766e" fill="url(#glucose)" strokeWidth={3} animationDuration={1200} animationEasing="ease-out" />
           </AreaChart>
         </ResponsiveContainer>
       </article>
@@ -62,7 +62,7 @@ export default function Overview({ patientId }) {
           </div>
           <strong className="big-number">{adherence}%</strong>
         </div>
-        <div className="adherence-ring" style={{ "--value": `${adherence}%` }}>
+        <div className="adherence-ring" data-value={`${adherence}%`} style={{ "--value": `${adherence}%` }}>
           <span>{adherence}%</span>
         </div>
       </article>
@@ -100,9 +100,9 @@ export default function Overview({ patientId }) {
             <XAxis dataKey="recorded_at" tickFormatter={(value) => new Date(value).toLocaleDateString()} />
             <YAxis />
             <Tooltip labelFormatter={(value) => new Date(value).toLocaleString()} />
-            <Line dataKey="systolic" stroke="#ef4444" strokeWidth={3} dot={false} />
-            <Line dataKey="diastolic" stroke="#f59e0b" strokeWidth={3} dot={false} />
-            <Line dataKey="heart_rate" stroke="#2563eb" strokeWidth={3} dot={false} />
+            <Line dataKey="systolic" stroke="#ef4444" strokeWidth={3} dot={false} animationDuration={1100} animationEasing="ease-out" />
+            <Line dataKey="diastolic" stroke="#f59e0b" strokeWidth={3} dot={false} animationDuration={1100} animationEasing="ease-out" />
+            <Line dataKey="heart_rate" stroke="#2563eb" strokeWidth={3} dot={false} animationDuration={1100} animationEasing="ease-out" />
           </LineChart>
         </ResponsiveContainer>
       </article>
