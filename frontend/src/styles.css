@@ -544,6 +544,77 @@ form button {
   gap: 16px;
 }
 
+.report-action-panel {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px 26px;
+  border: 1px solid rgba(217, 208, 197, 0.88);
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.84), rgba(240, 248, 245, 0.76)),
+    var(--glass);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(16px);
+}
+
+.report-action-panel h2 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 24px;
+}
+
+.report-action-panel p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.download-report-button {
+  flex: 0 0 auto;
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 14px;
+  padding: 0 24px;
+  color: #fff;
+  background: linear-gradient(135deg, #0b1d2b, #164e43);
+  font-size: 16px;
+  font-weight: 950;
+  box-shadow: 0 18px 38px rgba(11, 29, 43, 0.18);
+}
+
+.download-report-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 48px rgba(11, 29, 43, 0.22);
+}
+
+.report-message {
+  display: block;
+  margin-top: 10px;
+}
+
+.empty-state-panel {
+  grid-column: 1 / -1;
+}
+
+.empty-state-panel h2 {
+  margin: 0 0 8px;
+}
+
+.empty-state-panel p,
+.empty-copy {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 800;
+}
+
 .metric-card,
 .panel {
   border: 1px solid #d9d0c5;
@@ -900,6 +971,7 @@ th {
 
   .login-strip,
   .topbar,
+  .report-action-panel,
   .metric-row,
   .medication-grid,
   .profile-grid,
@@ -909,6 +981,15 @@ th {
 
   .topbar {
     align-items: stretch;
+  }
+
+  .report-action-panel {
+    align-items: stretch;
+    padding: 20px;
+  }
+
+  .download-report-button {
+    width: 100%;
   }
 }
 

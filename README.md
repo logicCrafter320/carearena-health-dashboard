@@ -69,7 +69,7 @@ The following modules are implemented in the current website:
 
 | Module | Status | Description |
 |---|---|---|
-| Login Access | Implemented | Any email and password can open the dashboard for demo access |
+| Login Access | Implemented | Registered users can log in with their saved email and password |
 | Landing Page | Implemented | CareArena healthcare-themed landing page |
 | Overview Dashboard | Implemented | Shows latest vitals, charts, alerts, and adherence |
 | Vitals Logging | Implemented | Form to add blood pressure, glucose, heart rate, and temperature |
@@ -79,6 +79,7 @@ The following modules are implemented in the current website:
 | Doctor Notes | Implemented | Doctor observation and notes module |
 | Patient History | Implemented | Table of previous vital records |
 | Profile | Implemented | Patient information and care details |
+| PDF Health Report Export | Implemented | Downloadable patient health report using jsPDF |
 | Vercel Deployment | Implemented | Frontend deployed from the `frontend` folder |
 
 ---
@@ -89,8 +90,6 @@ The official abstract includes the following planned modules. These are document
 
 | Planned Module | Purpose |
 |---|---|
-| Register Page | Complete login/register authentication flow |
-| Export PDF Module | Downloadable patient health reports using jsPDF |
 | Admin Panel | Manage users, doctors, and system-level activity |
 | History Filters | Filter records by date range and vital type |
 | Context API / Redux | Scalable global state management |
@@ -254,5 +253,5 @@ The deployed frontend uses built-in demo data. This allows professors, teammates
 - Implemented modules and planned modules are separated clearly.
 - The deployed version demonstrates the main chronic care monitoring workflow.
 - Backend and MySQL files are included to show full-stack implementation.
-- PDF export, Admin Panel, Register, Axios, Tailwind/Bootstrap, and Context/Redux are documented as planned or abstract modules, not as completed features.
+- Admin Panel, Axios, Tailwind/Bootstrap, and Context/Redux are documented as planned or abstract modules, not as completed features.
 - The project demonstrates routing, component-based UI, charts, state updates, responsive design, and deployment.
