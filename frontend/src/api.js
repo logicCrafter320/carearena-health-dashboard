@@ -112,6 +112,9 @@ function makeInitialRecord(profile) {
 
   return {
     patient,
+    auth: {
+      password: String(profile.password || "")
+    },
     vitals: makeVitals(patientId, patient.condition_name),
     alerts: [],
     medications: makeMedications(patientId, patient.condition_name),
@@ -131,23 +134,13 @@ function makeInitialRecord(profile) {
 function getRecord(patientId) {
   const store = loadStore();
   const email = normalizeEmail(patientId);
-  return store[email] || ensureRecord(email);
+  return store[email];
 }
 
 function setRecord(patientId, record) {
   const store = loadStore();
   store[normalizeEmail(patientId)] = record;
   saveStore(store);
-}
-
-function ensureRecord(email, profile = {}) {
-  const patientId = normalizeEmail(email);
-  const store = loadStore();
-  if (!store[patientId]) {
-    store[patientId] = makeInitialRecord({ ...profile, email: patientId });
-    saveStore(store);
-  }
-  return store[patientId];
 }
 
 function makeAlert(record, vital) {
@@ -171,18 +164,30 @@ export const api = {
   signup: async (profile) => {
     const email = normalizeEmail(profile.email);
     if (!email) throw new Error("Email is required");
-    const record = makeInitialRecord({ ...profile, email });
+    if (!profile.password) throw new Error("Password is required");
     const store = loadStore();
+    if (store[email]?.auth?.password) throw new Error("Account already exists");
+    const record = makeInitialRecord({ ...profile, email });
     store[email] = record;
     saveStore(store);
-    return { token: "demo-token", patient: record.patient };
+    return { token: `carearena-${Date.now()}`, patient: record.patient };
   },
 
-  login: async (email) => {
+  login: async (email, password) => {
     const patientId = normalizeEmail(email);
     if (!patientId) throw new Error("Email is required");
-    const record = ensureRecord(patientId);
-    return { token: "demo-token", patient: record.patient };
+    const record = getRecord(patientId);
+    if (!record) throw new Error("Account not found. Please create an account first");
+    if (!record.auth?.password) throw new Error("Please create an account first");
+    if (record.auth.password !== String(password || "")) throw new Error("Incorrect password");
+    return { token: `carearena-${Date.now()}`, patient: record.patient };
+  },
+
+  isValidSession: (session) => {
+    const patientId = normalizeEmail(session?.patient?.id);
+    if (!patientId || !session?.token) return false;
+    const record = getRecord(patientId);
+    return Boolean(record?.auth?.password);
   },
 
   dashboard: async (patientId) => {

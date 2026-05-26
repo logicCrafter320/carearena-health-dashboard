@@ -220,11 +220,13 @@ The database includes sample patient data, vitals, alerts, medications, and doct
 
 ## Login Details
 
-For demonstration, any email and password can be used.
+Users must create an account before logging in.
 
-Email: student@example.com
-Password: 123456
-```
+1. Open the Sign Up page.
+2. Register with patient details such as name, email, password, age, gender, chronic condition, emergency contact, and assigned doctor.
+3. Use the same registered email and password on the Login page.
+
+The app rejects unregistered emails, incorrect passwords, and duplicate email registrations.
 
 ---
 

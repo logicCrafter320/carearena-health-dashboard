@@ -17,16 +17,23 @@ export default function SignUp({ onSignUp }) {
     emergency_contact: ""
   });
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const update = (key, value) => setForm((current) => ({ ...current, [key]: value }));
 
   const submit = async (event) => {
     event.preventDefault();
     setError("");
+    setSuccess("");
+    setIsLoading(true);
     try {
-      onSignUp(await api.signup(form));
+      const nextSession = await api.signup(form);
+      setSuccess("Account created successfully. Opening dashboard...");
+      window.setTimeout(() => onSignUp(nextSession), 550);
     } catch (err) {
       setError(err.message);
+      setIsLoading(false);
     }
   };
 
@@ -46,23 +53,23 @@ export default function SignUp({ onSignUp }) {
         <form className="auth-form" onSubmit={submit}>
           <label>
             Full Name
-            <input placeholder="Enter full name" value={form.name} onChange={(event) => update("name", event.target.value)} required />
+            <input placeholder="Enter full name" value={form.name} onChange={(event) => update("name", event.target.value)} required disabled={isLoading} />
           </label>
           <label>
             Email
-            <input type="email" placeholder="Enter email" value={form.email} onChange={(event) => update("email", event.target.value)} required />
+            <input type="email" placeholder="Enter email" value={form.email} onChange={(event) => update("email", event.target.value)} required disabled={isLoading} />
           </label>
           <label>
             Password
-            <input type="password" placeholder="Create password" value={form.password} onChange={(event) => update("password", event.target.value)} required />
+            <input type="password" placeholder="Create password" value={form.password} onChange={(event) => update("password", event.target.value)} required disabled={isLoading} />
           </label>
           <label>
             Age
-            <input type="number" placeholder="Enter age" value={form.age} onChange={(event) => update("age", event.target.value)} required />
+            <input type="number" placeholder="Enter age" value={form.age} onChange={(event) => update("age", event.target.value)} required disabled={isLoading} />
           </label>
           <label>
             Gender
-            <select value={form.gender} onChange={(event) => update("gender", event.target.value)} required>
+            <select value={form.gender} onChange={(event) => update("gender", event.target.value)} required disabled={isLoading}>
               <option value="">Select gender</option>
               <option value="Female">Female</option>
               <option value="Male">Male</option>
@@ -71,7 +78,7 @@ export default function SignUp({ onSignUp }) {
           </label>
           <label>
             Chronic Condition
-            <select value={form.condition_name} onChange={(event) => update("condition_name", event.target.value)} required>
+            <select value={form.condition_name} onChange={(event) => update("condition_name", event.target.value)} required disabled={isLoading}>
               <option value="Diabetes">Diabetes</option>
               <option value="Hypertension">Hypertension</option>
               <option value="Diabetes and Hypertension">Diabetes and Hypertension</option>
@@ -82,19 +89,20 @@ export default function SignUp({ onSignUp }) {
           </label>
           <label>
             Phone
-            <input placeholder="Enter phone number" value={form.phone} onChange={(event) => update("phone", event.target.value)} />
+            <input placeholder="Enter phone number" value={form.phone} onChange={(event) => update("phone", event.target.value)} disabled={isLoading} />
           </label>
           <label>
             Emergency Contact
-            <input placeholder="Emergency contact" value={form.emergency_contact} onChange={(event) => update("emergency_contact", event.target.value)} />
+            <input placeholder="Emergency contact" value={form.emergency_contact} onChange={(event) => update("emergency_contact", event.target.value)} disabled={isLoading} />
           </label>
           <label>
             Doctor Name
-            <input placeholder="Primary doctor" value={form.doctor_name} onChange={(event) => update("doctor_name", event.target.value)} />
+            <input placeholder="Primary doctor" value={form.doctor_name} onChange={(event) => update("doctor_name", event.target.value)} disabled={isLoading} />
           </label>
-          <button type="submit">Create Account</button>
+          <button type="submit" disabled={isLoading}>{isLoading ? "Creating..." : "Create Account"}</button>
         </form>
         {error && <p className="form-error">{error}</p>}
+        {success && <p className="success-message">{success}</p>}
         <p className="auth-switch">Already have an account? <Link to="/login">Login</Link></p>
       </section>
     </main>

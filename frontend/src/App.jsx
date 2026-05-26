@@ -12,6 +12,7 @@ import Medications from "./pages/Medications.jsx";
 import Notes from "./pages/Notes.jsx";
 import Profile from "./pages/Profile.jsx";
 import usePremiumMotion from "./hooks/usePremiumMotion.js";
+import { api } from "./api.js";
 
 export default function App() {
   const location = useLocation();
@@ -20,7 +21,7 @@ export default function App() {
     if (!saved) return null;
     try {
       const parsed = JSON.parse(saved);
-      return String(parsed?.patient?.id || "").includes("@") ? parsed : null;
+      return api.isValidSession(parsed) ? parsed : null;
     } catch {
       return null;
     }
