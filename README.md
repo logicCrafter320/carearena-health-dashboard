@@ -19,6 +19,7 @@ A healthcare dashboard for monitoring chronic conditions such as diabetes and hy
 ## Table of Contents
 
 - [Overview](#overview)
+- [Screenshots](#screenshots)
 - [Project Objective](#project-objective)
 - [Current Implementation](#current-implementation)
 - [Planned Modules From Abstract](#planned-modules-from-abstract)
@@ -48,6 +49,22 @@ This repository contains:
 | `database` | MySQL schema and sample data |
 
 The deployed frontend uses built-in demo fallback data, so the website can be demonstrated directly from Vercel without requiring local MySQL setup.
+
+---
+
+## Screenshots
+
+### Home Page
+
+![CareArena Home Page](screenshots/home-page.png)
+
+### Dashboard With Health Report Export
+
+![CareArena Dashboard With Health Report Export](screenshots/dashboard-report-export.png)
+
+### PDF Health Report Preview
+
+![CareArena PDF Health Report Preview](screenshots/pdf-report-preview.svg)
 
 ---
 
