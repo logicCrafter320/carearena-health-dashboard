@@ -36,9 +36,12 @@ A healthcare dashboard for monitoring chronic conditions such as diabetes and hy
 
 ## Overview
 
-CareArena is a chronic disease monitoring dashboard designed to help patients and healthcare providers track long-term health conditions. The project focuses on diabetes and hypertension monitoring by recording vital health parameters such as blood sugar, blood pressure, heart rate, and body temperature.
+## Overview
 
-The dashboard visualizes patient readings through interactive charts, detects abnormal values using threshold-based alerts, and organizes patient care information through medication tracking, doctor notes, health history, and profile management.
+CareArena is a chronic disease monitoring dashboard designed primarily for patient-side healthcare monitoring and chronic care tracking. The project focuses on diabetes and hypertension monitoring by recording vital health parameters such as blood sugar, blood pressure, heart rate, and body temperature.
+
+The dashboard visualizes patient readings through interactive charts, detects abnormal values using threshold-based alerts, and organizes patient care information through medication tracking, doctor observations, patient history, and profile management.
+
 
 This repository contains:
 
@@ -93,7 +96,7 @@ The following modules are implemented in the current website:
 | Charts Visualization | Implemented | Glucose trend and BP/heart rate charts using Recharts |
 | Alerts | Implemented | Warning and critical alert display |
 | Medication Tracker | Implemented | Medicine schedule with taken/pending status |
-| Doctor Notes | Implemented | Doctor observation and notes module |
+| Doctor observation and notes module   | Implemented | Doctor observation and notes module |
 | Patient History | Implemented | Table of previous vital records |
 | Profile | Implemented | Patient information and care details |
 | PDF Health Report Export | Implemented | Downloadable patient health report using jsPDF |
